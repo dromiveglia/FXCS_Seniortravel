@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>抱团养老 · 荣休新青年计划</title>
+
+<!-- ============ 微信公众号推文分享卡片（JS-SDK） ============ -->
+<meta itemprop="name" content="抱团养老 · 荣休新青年计划">
+<meta itemprop="description" content="60–75 岁荣休专家的结群欢乐平台：省内短途、省外长线、季度聚会与学术年会，32 条专家团线路任选 →">
+<meta itemprop="image" content="https://example.com/share-cover.jpg">
+<meta property="og:title" content="抱团养老 · 荣休新青年计划">
+<meta property="og:description" content="60–75 岁荣休专家的结群欢乐平台：省内短途、省外长线、季度聚会与学术年会，32 条专家团线路任选 →">
+<meta property="og:image" content="https://example.com/share-cover.jpg">
+<meta property="og:type" content="website">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+  window.wxShareConfig = {
+    title: '抱团养老 · 荣休新青年计划',
+    desc: '60–75 岁荣休专家的结群欢乐平台，32 条专家团线路任选 →',
+    link: location.href.split('#')[0],
+    imgUrl: 'https://example.com/share-cover.jpg'
+  };
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof wx === 'undefined') return;
+    wx.ready(function () {
+      var c = window.wxShareConfig;
+      wx.updateAppMessageShareData({ title: c.title, desc: c.desc, link: c.link, imgUrl: c.imgUrl });
+      wx.updateTimelineShareData({ title: c.title, link: c.link, imgUrl: c.imgUrl });
+    });
+  });
+</script>
+
+<style>
+  :root {
+    --primary: #1f5fbf;
+    --primary-dark: #14417f;
+    --primary-light: #e8f1fd;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1c2b3a;
+    --muted: #6b7a8c;
+    --radius: 16px;
+    --shadow: 0 4px 20px rgba(31, 95, 191, .10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: 74px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* ===== 开场介绍 ===== */
+  .hero {
+    background: linear-gradient(150deg, var(--primary-dark) 0%, var(--primary) 55%, #3d82e0 100%);
+    color: #fff;
+    text-align: center;
+    padding: 54px 24px 46px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%;
+    background: rgba(255,255,255,.08); top: -140px; right: -100px;
+  }
+  .hero::after {
+    content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%;
+    background: rgba(255,255,255,.06); bottom: -120px; left: -80px;
+  }
+  .hero .badge {
+    display: inline-block; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+    padding: 4px 16px; border-radius: 999px; font-size: 13px; letter-spacing: 2px; margin-bottom: 18px;
+  }
+  .hero h1 { font-size: clamp(21px, 6.1vw, 28px); letter-spacing: 1px; margin-bottom: 14px; position: relative; }
+  .hero p { max-width: 560px; margin: 0 auto; font-size: 15px; opacity: .92; }
+  .hero .meta {
+    margin-top: 20px; display: inline-flex; gap: 0; flex-wrap: nowrap; justify-content: center;
+    align-items: center; font-size: 14px; background: rgba(0,0,0,.15);
+    padding: 10px 20px; border-radius: 12px; white-space: nowrap; max-width: 100%;
+  }
+  .hero .meta span { padding: 0 14px; position: relative; }
+  .hero .meta span + span::before {
+    content: ""; position: absolute; left: -1px; top: 50%; transform: translateY(-50%);
+    width: 1px; height: 12px; background: rgba(255,255,255,.35);
+  }
+
+  /* ===== 九宫格 ===== */
+  .section-title { text-align: center; margin: 36px 0 22px; font-size: 20px; }
+  .section-title::after {
+    content: ""; display: block; width: 42px; height: 3px;
+    background: var(--primary); border-radius: 3px; margin: 8px auto 0;
+  }
+  .grid {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    padding: 0 16px; max-width: 720px; margin: 0 auto;
+  }
+  .card {
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 22px 8px 20px; text-align: center; cursor: pointer;
+    transition: transform .2s, box-shadow .2s; border: 1px solid transparent;
+    aspect-ratio: 1 / .92; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; min-width: 0;
+  }
+  .card:hover, .card:active { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(31,95,191,.18); }
+  .card .icon {
+    width: 48px; height: 48px; margin: 0 auto 10px; border-radius: 14px;
+    background: var(--primary-light); display: flex; align-items: center;
+    justify-content: center; color: var(--primary-dark);
+  }
+  .card .icon svg { width: 26px; height: 26px; display: block; }
+  .card h3 { font-size: 15px; color: var(--primary-dark); margin-bottom: 3px; }
+  .card p { font-size: 11.5px; color: var(--muted); }
+  .card.placeholder { cursor: default; border: 1.5px dashed #c4d4ec; background: #fbfdff; }
+  .card.placeholder:hover { transform: none; box-shadow: var(--shadow); }
+  .card.placeholder .icon { background: #f0f4fa; color: #9db4d4; position: relative; }
+  .card.placeholder .icon::before,
+  .card.placeholder .icon::after {
+    content: ""; position: absolute; background: currentColor; border-radius: 2px;
+  }
+  .card.placeholder .icon::before { width: 20px; height: 1.8px; }
+  .card.placeholder .icon::after { width: 1.8px; height: 20px; }
+  .card.placeholder h3 { color: #8fa5c2; }
+  .card.placeholder p { color: #b7c6db; }
+
+  @media (max-width: 400px) {
+    .hero { padding: 46px 18px 40px; }
+    .hero .meta { font-size: 12.5px; padding: 9px 12px; }
+    .hero .meta span { padding: 0 9px; }
+    .grid { gap: 10px; padding: 0 12px; }
+    .card { padding: 16px 6px 14px; border-radius: 14px; }
+    .card .icon { width: 42px; height: 42px; margin-bottom: 8px; border-radius: 12px; }
+    .card .icon svg { width: 23px; height: 23px; }
+    .card h3 { font-size: 13px; }
+    .card p { font-size: 10.5px; }
+  }
+
+  /* ===== 底部条 ===== */
+  .bottom-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+    box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    display: flex; gap: 12px; z-index: 50;
+  }
+  .bottom-bar button {
+    flex: 1; border: none; border-radius: 999px; font-size: 15px; padding: 12px 0; cursor: pointer;
+  }
+  .btn-share { background: var(--primary-light); color: var(--primary-dark); }
+  .btn-signup { background: linear-gradient(90deg, var(--primary), #3d82e0); color: #fff; }
+
+  /* ===== 普通弹窗 ===== */
+  .modal-mask {
+    position: fixed; inset: 0; background: rgba(10,25,50,.55); display: none;
+    align-items: flex-end; justify-content: center; z-index: 100;
+  }
+  .modal-mask.show { display: flex; animation: fadeIn .2s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: #fff; width: 100%; max-width: 560px; max-height: 78vh; overflow-y: auto;
+    border-radius: 20px 20px 0 0; padding: 28px 24px 34px; animation: slideUp .25s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(40px); opacity: .4; } to { transform: none; opacity: 1; } }
+  .modal h2 { color: var(--primary-dark); font-size: 19px; margin-bottom: 6px; }
+  .modal h2 .ic { display: inline-flex; vertical-align: -4px; margin-right: 7px; color: var(--primary); }
+  .modal h2 .ic svg { width: 20px; height: 20px; }
+  .modal .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+  .modal .content { font-size: 14.5px; }
+  .modal .content ul { padding-left: 18px; margin: 8px 0; }
+  .modal .content li { margin: 6px 0; }
+  .modal .close {
+    position: sticky; top: 0; float: right; font-size: 22px; color: #9aa8b8;
+    background: none; border: none; cursor: pointer; line-height: 1;
+  }
+  .modal .cta {
+    display: block; width: 100%; margin-top: 20px;
+    background: linear-gradient(90deg, var(--primary), #3d82e0); color: #fff;
+    border: none; border-radius: 999px; padding: 13px 0; font-size: 15px; cursor: pointer;
+  }
+  .hotline { font-size: 20px; color: var(--primary); font-weight: 700; letter-spacing: 1px; }
+
+  /* ================= 路线面板 ================= */
+  .route-panel {
+    position: fixed; inset: 0; background: #eef2f8; z-index: 150;
+    display: flex; flex-direction: column;
+    transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+    visibility: hidden;
+  }
+  .route-panel.show { transform: none; visibility: visible; }
+
+  .rp-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff; flex-shrink: 0;
+  }
+  .rp-head .back {
+    width: 34px; height: 34px; border-radius: 10px; border: none; flex-shrink: 0;
+    background: rgba(255,255,255,.16); color: #fff; font-size: 19px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rp-head .titles { flex: 1; min-width: 0; }
+  .rp-head h2 { font-size: 16px; font-weight: 600; }
+  .rp-head .cap { font-size: 11.5px; opacity: .78; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rp-head .nav-toggle {
+    display: flex; align-items: center; gap: 5px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,.42); background: rgba(255,255,255,.14);
+    color: #fff; font-size: 12.5px; padding: 6px 11px; border-radius: 999px; cursor: pointer;
+  }
+  .rp-head .nav-toggle .bars { display: flex; flex-direction: column; gap: 3px; }
+  .rp-head .nav-toggle .bars i { display: block; width: 13px; height: 1.6px; background: currentColor; border-radius: 1px; }
+
+  .rp-main {
+    flex: 1; display: flex; min-height: 0; overflow: hidden;
+    width: 100%; max-width: 1180px; margin: 0 auto;
+  }
+
+  /* ---- 侧边导航 ---- */
+  .rp-side {
+    width: 252px; flex-shrink: 0; background: #fff;
+    border-right: 1px solid #e5edf7;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 12px 0 40px; overscroll-behavior: contain;
+  }
+  .rp-side::-webkit-scrollbar { width: 5px; }
+  .rp-side::-webkit-scrollbar-thumb { background: #cfdcee; border-radius: 3px; }
+
+  .side-cap {
+    font-size: 10.5px; color: #93a4b8; letter-spacing: 1.2px;
+    padding: 8px 18px 7px; font-weight: 600;
+  }
+  .side-cap em { font-style: normal; color: var(--primary); }
+  .side-close {
+    display: none; width: 100%; text-align: right; border: none; background: none;
+    padding: 4px 16px 10px; color: #8ea1b8; font-size: 20px; cursor: pointer;
+  }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 7px;
+    padding: 10px 18px; font-size: 14px; color: #33465c;
+    cursor: pointer; position: relative;
+    transition: background .15s, color .15s;
+  }
+  .nav-item em { margin-left: auto; font-style: normal; font-size: 11.5px; color: #9fb0c6; }
+  .nav-item .tag {
+    font-style: normal; font-size: 9.5px; color: #b0894a; background: #fdf5e6;
+    border: 1px solid #f2e0bf; border-radius: 4px; padding: 0 4px; line-height: 1.5;
+  }
+  .nav-item .caret {
+    font-style: normal; font-size: 12px; color: #b6c5d8; margin-left: 3px;
+    transition: transform .22s; display: inline-block;
+  }
+  .nav-item.open .caret { transform: rotate(90deg); }
+  .nav-item.on { background: var(--primary-light); color: var(--primary-dark); font-weight: 600; }
+  .nav-item.on em { color: var(--primary); }
+  .nav-item.on::before {
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 18px; background: var(--primary); border-radius: 0 3px 3px 0;
+  }
+
+  .nav-sub { max-height: 0; overflow: hidden; transition: max-height .25s ease; background: #fbfdff; }
+  .nav-sub.open { max-height: 220px; }
+  .nav-item.sub { padding: 8px 18px 8px 36px; font-size: 13px; color: #5b6f88; }
+  .nav-item.sub.on { background: #eef5fe; color: var(--primary); font-weight: 600; }
+  .nav-item.sub.on::before { display: none; }
+
+  /* ---- 方案列表 ---- */
+  .route-list { padding: 2px 10px 0; }
+  .route-item {
+    display: flex; gap: 9px; align-items: center;
+    padding: 7px 8px; border-radius: 10px; cursor: pointer;
+    transition: background .15s;
+  }
+  .route-item:hover { background: #f5f9ff; }
+  .route-item.on { background: var(--primary-light); }
+  .route-item img {
+    width: 44px; height: 34px; object-fit: cover; object-position: top;
+    border-radius: 6px; background: #e8eff8; flex-shrink: 0;
+  }
+  .route-item .ri-t { font-size: 12.5px; line-height: 1.3; color: #2b3c50; }
+  .route-item.on .ri-t { color: var(--primary-dark); font-weight: 600; }
+  .route-item .ri-d { font-size: 10.5px; color: #93a4b8; margin-top: 2px; }
+  .route-empty { font-size: 12px; color: #9fb0c6; padding: 14px 18px; }
+  .side-hint {
+    font-size: 11.5px; color: #9fb0c6; line-height: 1.7;
+    padding: 14px 18px; border-top: 1px dashed #e8eff8; margin-top: 12px;
+  }
+
+  /* ---- 分类方式切换 ---- */
+  .side-seg {
+    display: flex; gap: 3px; margin: 6px 14px 12px; padding: 3px;
+    background: #eff4fb; border-radius: 10px;
+  }
+  .side-seg button {
+    flex: 1; border: none; background: none; font: inherit; font-size: 12.5px;
+    padding: 7px 0; border-radius: 8px; color: #5b6f88; cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .side-seg button.on {
+    background: #fff; color: var(--primary-dark); font-weight: 600;
+    box-shadow: 0 1px 4px rgba(20,65,127,.12);
+  }
+
+  /* ---- 分类入口页 ---- */
+  .home { max-width: 940px; margin: 0 auto; }
+  .home-sec { margin-bottom: 24px; }
+  .home-sec > h3 {
+    display: flex; align-items: baseline; gap: 9px; margin: 2px 2px 12px;
+    font-size: 15px; color: var(--primary-dark); font-weight: 600;
+  }
+  .home-sec > h3 em { font-style: normal; font-size: 11.5px; font-weight: 400; color: #93a4b8; }
+  .home-sec > h3::after { content: ""; flex: 1; height: 1px; background: #dde8f6; align-self: center; }
+  .home-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  @media (min-width: 720px) { .home-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .ent-card {
+    display: flex; align-items: center; gap: 8px; width: 100%; min-height: 70px; text-align: left;
+    background: #fff; border: 1px solid #e4edf9; border-radius: 12px; padding: 14px;
+    font: inherit; color: #23374e; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(20,65,127,.05);
+    transition: transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .ent-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(20,65,127,.14); border-color: #bcd4f2; }
+  .ent-card:active { transform: scale(.985); }
+  .ent-card .et { font-size: 14px; font-weight: 600; }
+  .ent-card .es { font-size: 11px; color: #93a4b8; margin-top: 3px; }
+  .ent-card .en { margin-left: auto; font-style: normal; font-size: 12px; color: var(--primary); font-weight: 600; white-space: nowrap; }
+
+  /* ---- 路线目录（进入面板后的首页） ---- */
+  .catalog { max-width: 940px; margin: 0 auto; }
+  .cat-sec { display: flex; align-items: baseline; gap: 9px; margin: 2px 2px 12px; }
+  .cat-sec h3 { font-size: 15px; color: var(--primary-dark); font-weight: 600; }
+  .cat-sec em { font-style: normal; font-size: 11.5px; color: #93a4b8; }
+  .cat-sec::after { content: ""; flex: 1; height: 1px; background: #dde8f6; align-self: center; }
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px; margin-bottom: 26px;
+  }
+  @media (min-width: 680px)  { .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1080px) { .cat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .cat-card {
+    display: block; width: 100%; padding: 0; text-align: left; cursor: pointer;
+    background: #fff; border: 1px solid #e4edf9; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(20,65,127,.05); font: inherit; color: inherit;
+    transition: transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .cat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(20,65,127,.14); border-color: #bcd4f2; }
+  .cat-card:active { transform: scale(.985); }
+  .cat-card .cc-img { position: relative; height: 92px; background: #e8eff8; overflow: hidden; }
+  .cat-card .cc-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .cat-card .cc-days {
+    position: absolute; left: 7px; top: 7px; font-style: normal;
+    background: rgba(10,30,60,.6); color: #fff; font-size: 10.5px; line-height: 1.55;
+    padding: 1px 7px; border-radius: 999px;
+  }
+  .cat-card .cc-body { padding: 9px 10px 11px; }
+  .cat-card .cc-t {
+    font-size: 13px; font-weight: 600; color: #23374e; line-height: 1.35;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cat-card .cc-m { font-size: 10.5px; color: #93a4b8; margin-top: 3px; }
+
+  /* ---- 图片区 ---- */
+  .rp-body {
+    flex: 1; overflow-y: auto; min-width: 0;
+    padding: 14px 14px calc(28px + env(safe-area-inset-bottom));
+    overscroll-behavior: contain;
+  }
+  .rp-body .tip:empty { display: none; }
+  .rp-body .tip {
+    text-align: center; font-size: 12px; color: var(--muted);
+    padding: 0 0 12px; letter-spacing: .4px;
+  }
+  .rp-body .tip .warn { color: #c0392b; display: block; margin-top: 4px; }
+  .page-img {
+    width: 100%; max-width: 700px; display: block; margin: 0 auto 10px;
+    border-radius: 8px; box-shadow: 0 3px 12px rgba(20,65,127,.12);
+    background: #fff; cursor: zoom-in;
+  }
+  .page-img.fail {
+    min-height: 180px; cursor: default;
+    background: #f2f6fc; border: 1px dashed #c6d6ea;
+  }
+
+  /* ---- 遮罩（移动端） ---- */
+  .rp-mask {
+    position: fixed; inset: 0; background: rgba(8,20,40,.42); z-index: 19;
+    opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+  }
+  .rp-mask.show { opacity: 1; visibility: visible; }
+
+  @media (max-width: 819px) {
+    .rp-side {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: 82%; max-width: 320px; z-index: 20;
+      transform: translateX(-102%);
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+      padding-top: calc(8px + env(safe-area-inset-top));
+      padding-bottom: calc(30px + env(safe-area-inset-bottom));
+      box-shadow: 6px 0 26px rgba(15,40,80,.18);
+      border-right: none;
+    }
+    .rp-side.open { transform: none; }
+    .side-close { display: block; }
+  }
+  @media (min-width: 820px) {
+    .rp-mask { display: none; }
+    .rp-head .nav-toggle { display: none; }
+    .rp-side { border-top: none; }
+  }
+
+  /* ---- 图片放大 ---- */
+  .viewer {
+    position: fixed; inset: 0; background: #0b1520; z-index: 300;
+    display: none; align-items: flex-start; justify-content: center; overflow: auto;
+  }
+  .viewer.show { display: flex; }
+  .viewer img { max-width: 100%; display: block; }
+  .viewer .vclose {
+    position: fixed; top: calc(12px + env(safe-area-inset-top)); right: 14px;
+    width: 38px; height: 38px; border-radius: 50%; border: none;
+    background: rgba(255,255,255,.16); color: #fff; font-size: 20px; cursor: pointer; z-index: 2;
+  }
+
+  .share-tip {
+    position: fixed; inset: 0; background: rgba(0,0,0,.65); color: #fff;
+    display: none; align-items: flex-start; justify-content: center;
+    z-index: 400; font-size: 15px; padding-top: 60px; text-align: center;
+  }
+  .share-tip.show { display: flex; }
+
+  @media (max-width: 340px) {
+    .hero .meta { font-size: 11.5px; padding: 8px 10px; }
+    .hero .meta span { padding: 0 7px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 开场介绍 ===== -->
+<header class="hero">
+  <div class="badge">深圳市分析测试协会 · 抱团养老</div>
+  <h1>荣休新青年 结群欢乐计划</h1>
+  <p>为 60–75 岁荣休专家打造结群欢乐的平台：省内短途、省外长线、季度聚会与学术年会，与老同事同行同乐，为抱团养老打下坚实的「熟人」底子。</p>
+  <div class="meta">
+    <span>退休不是退场，而是「第二春」的开场。</span>
+  </div>
+</header>
+
+<!-- ===== 九宫格模块 ===== -->
+<h2 class="section-title">了解活动</h2>
+<div class="grid" id="moduleGrid"></div>
+
+<!-- ===== 底部条 ===== -->
+<div class="bottom-bar">
+  <button class="btn-share" onclick="showShareTip()">分享给朋友</button>
+  <button class="btn-signup" onclick="openModal('signup')">立即报名</button>
+</div>
+
+<!-- ===== 普通弹窗 ===== -->
+<div class="modal-mask" id="modalMask" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<!-- ================= 路线介绍面板 ================= -->
+<div class="route-panel" id="routePanel">
+  <div class="rp-head">
+    <button class="back" id="rpBackBtn" onclick="rpBack()">✕</button>
+    <div class="titles">
+      <h2 id="rpTitle">路线介绍</h2>
+      <div class="cap" id="rpCap">32 条专家团线路</div>
+    </div>
+    <button class="nav-toggle" onclick="toggleSide(true)">
+      <span class="bars"><i></i><i></i><i></i></span>线路
+    </button>
+  </div>
+  <div class="rp-main">
+    <aside class="rp-side" id="rpSide"></aside>
+    <div class="rp-body" id="rpBody"></div>
+  </div>
+  <div class="rp-mask" id="rpMask" onclick="toggleSide(false)"></div>
+</div>
+
+<!-- 图片放大 -->
+<div class="viewer" id="viewer" onclick="closeViewer()">
+  <button class="vclose" onclick="closeViewer()">✕</button>
+  <img id="viewerImg" src="" alt="">
+</div>
+
+<div class="share-tip" id="shareTip" onclick="this.classList.remove('show')">
+  <div>请点击右上角「···」<br>选择「发送给朋友」或「分享到朋友圈」</div>
+</div>
+
+<script>
+/* 图片扩展名：完整版为 jpg，轻量版为 webp（打包时替换） */
+const IMG_EXT = 'jpg';
+
+/* ==================== 路线数据 ==================== */
+/* group: 省外 / 省内；days 中的数字用于省内按天数筛选 */
+/* 顺序：省内在前、省外在后 */
+const ROUTES = [
+  { slug:'conghua',      title:'从化 · 天人山水',        days:'2日', group:'省内', pages:11 },
+  { slug:'foshan2',      title:'佛山 · 三个方案',        days:'2日', group:'省内', pages:8 },
+  { slug:'huizhou2',     title:'惠州 · 罗浮山西湖',       days:'2日', group:'省内', pages:8 },
+  { slug:'shanwei',      title:'汕尾 · 红海湾',         days:'2日', group:'省内', pages:7 },
+  { slug:'shangchuan',   title:'上川岛 · 渔港风情',       days:'2日', group:'省内', pages:7 },
+  { slug:'xiachuan',     title:'下川岛 · 江门',         days:'2日', group:'省内', pages:8 },
+  { slug:'yunfu',        title:'云浮 · 国恩寺天露山',      days:'2日', group:'省内', pages:7 },
+  { slug:'zhaoqing2',    title:'肇庆 · 鼎湖七星岩',       days:'2日', group:'省内', pages:9 },
+  { slug:'fs-zq3',       title:'佛山肇庆',             days:'3日', group:'省内', pages:11 },
+  { slug:'fsjm3',        title:'佛山江门阳江',           days:'3日', group:'省内', pages:15 },
+  { slug:'heyuan',       title:'河源 · 万绿湖',         days:'3日', group:'省内', pages:16 },
+  { slug:'bl3',          title:'惠州博罗 · 218公路',     days:'3日', group:'省内', pages:13 },
+  { slug:'shaoguan',     title:'韶关 · 丹霞山',         days:'3日', group:'省内', pages:10 },
+  { slug:'yingde3',      title:'英德 · 宝晶宫',         days:'3日', group:'省内', pages:8 },
+  { slug:'zh-zhongshan', title:'珠海中山 · 长隆',        days:'3日', group:'省内', pages:10 },
+  { slug:'liannan',      title:'清远连南 · 千年瑶寨',      days:'3日', group:'省内', pages:8 },
+  { slug:'qyyd3',        title:'清远英德 · 洞天仙境',      days:'3日', group:'省内', pages:11 },
+  { slug:'chaoshan',     title:'潮汕 · 南澳岛',         days:'4日', group:'省内', pages:9 },
+
+  { slug:'yn-kundali',   title:'云南 · 昆大丽',         days:'6日', group:'省外', sub:'国内', pages:9 },
+  { slug:'yn-mangshi',   title:'云南 · 芒市腾冲',        days:'5日', group:'省外', sub:'祖国边疆', pages:18 },
+  { slug:'qingdao',      title:'青岛 · 蓝色半岛',        days:'5日', group:'省外', sub:'国内', pages:9 },
+  { slug:'sd-lunan',     title:'山东 · 鲁南文化',        days:'6日', group:'省外', sub:'国内', pages:8 },
+  { slug:'shanxi',       title:'山西 · 小环线',         days:'5日', group:'省外', sub:'国内', pages:20 },
+  { slug:'sx-qinba',     title:'陕西 · 秋染秦巴',        days:'5日', group:'省外', sub:'国内', pages:11 },
+  { slug:'sx-qinling',   title:'陕西 · 秦岭四日',        days:'4日', group:'省外', sub:'国内', pages:6 },
+  { slug:'fujian',       title:'福建 · 长汀漳州',        days:'4日', group:'省外', sub:'邻省', pages:9 },
+  { slug:'gansu-ejina',  title:'甘肃 · 额济纳胡杨',       days:'6日', group:'省外', sub:'祖国边疆', pages:4 },
+  { slug:'guangxi',      title:'广西 · 桂林阳朔',        days:'3日', group:'省外', sub:'邻省', pages:9 },
+  { slug:'guizhou',      title:'贵州 · 景秀黔',         days:'5日', group:'省外', sub:'国内', pages:9 },
+  { slug:'hexi',         title:'河西走廊',             days:'6日', group:'省外', sub:'国内', pages:8 },
+  { slug:'hunan-cz',     title:'湖南 · 郴州全景',        days:'4日', group:'省外', sub:'邻省', pages:11 },
+  { slug:'ningxia',      title:'宁夏 · 康养',          days:'5日', group:'省外', sub:'国内', pages:6 },
+];
+
+/* ---------- 分类方式一：按区域 ---------- */
+const NAV_AREA = [
+  { key:'all',  label:'全部线路' },
+  { key:'省内', label:'省内线路', children:[
+      { key:'省内-2', label:'2 天线路' },
+      { key:'省内-3', label:'3 天线路' },
+      { key:'省内-4', label:'4 天线路' }
+  ]},
+  { key:'省外', label:'省外线路', children:[
+      { key:'省外-邻省', label:'邻省' },
+      { key:'省外-湾区', label:'湾区' },
+      { key:'省外-国内', label:'国内' },
+      { key:'省外-祖国边疆', label:'祖国边疆' }
+  ]}
+];
+
+/* ---------- 分类方式二：按天数档位 ---------- */
+const DAY_TIERS = [
+  { day:2, label:'两天一夜' },
+  { day:3, label:'三天两夜' },
+  { day:4, label:'四天三夜' },
+  { day:5, label:'五天四夜' },
+  { day:6, label:'六天五夜' }
+];
+const NAV_DAYS = DAY_TIERS.map(t => ({ key:'d-' + t.day, label:t.label, day:t.day, icon:true }));
+
+/* ==================== 图标（内联 SVG） ==================== */
+const SVG = (inner) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+const ICONS = {
+  compass: SVG('<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1 5.1-2.1z"/>'),
+  ticket:  SVG('<path d="M3.5 8.2V6.8a1.4 1.4 0 011.4-1.4h14.2a1.4 1.4 0 011.4 1.4v1.4a2.6 2.6 0 000 5.2v1.4a1.4 1.4 0 01-1.4 1.4H4.9a1.4 1.4 0 01-1.4-1.4v-1.4a2.6 2.6 0 000-5.2z"/><path d="M14.2 5.8v12.4" stroke-dasharray="2 3"/>'),
+  map:     SVG('<path d="M9 4.2L3.6 6.5v13.3L9 17.5l6 2.3 5.4-2.3V4.2L15 6.5 9 4.2z"/><path d="M9 4.2v13.3M15 6.5v13.3"/>'),
+  phone:   SVG('<path d="M6.8 3.6h-.7A2.6 2.6 0 003.5 6.2c0 8 6.5 14.5 14.5 14.5a2.6 2.6 0 002.6-2.6v-.7a1.5 1.5 0 00-1.2-1.5l-2.9-.6a1.5 1.5 0 00-1.5.6l-.8 1.1a13.2 13.2 0 01-5.6-5.6l1.1-.8a1.5 1.5 0 00.6-1.5l-.6-2.9a1.5 1.5 0 00-1.5-1.2z"/>'),
+  pen:     SVG('<path d="M15.6 4.2l4.2 4.2L8.4 19.8 4 20l.2-4.4L15.6 4.2z"/><path d="M13.4 6.4l4.2 4.2"/>')
+};
+
+/* ==================== 九宫格模块 ==================== */
+const MODULES = [
+  { id:'service', icon:ICONS.compass, title:'服务介绍',      sub:'我们为您提供什么' },
+  { id:'tiers',   icon:ICONS.ticket,  title:'服务档次及权益', sub:'选择适合您的一档' },
+  { id:'routes',  icon:ICONS.map,     title:'路线介绍',      sub:'32 条精选线路', route:true },
+  { id:'hotline', icon:ICONS.phone,   title:'旅游热线',      sub:'随时为您服务' },
+  {}, {}, {}, {}, {}
+];
+
+const grid = document.getElementById('moduleGrid');
+MODULES.forEach(m => {
+  const isPh = !m.id;
+  const el = document.createElement('div');
+  el.className = 'card' + (isPh ? ' placeholder' : '');
+  el.innerHTML = isPh
+    ? '<div class="icon"></div><h3>敬请期待</h3><p>更多模块即将上线</p>'
+    : `<div class="icon">${m.icon}</div><h3>${m.title}</h3><p>${m.sub}</p>`;
+  if (!isPh) el.onclick = () => m.route ? openRoutePanel() : openModal(m.id);
+  grid.appendChild(el);
+});
+
+/* ==================== 内容弹窗 ==================== */
+const MODAL_DATA = {
+  service: {
+    icon:ICONS.compass, title:'服务介绍', sub:'我们为您提供什么',
+    content:'<p>本次专列围绕「吃、住、行、游、购、娱」提供一站式服务：</p>' +
+      '<ul>' +
+      '<li>专业领队：全程陪同，节奏宽松不赶路</li>' +
+      '<li>同龄结伴：按年龄段组队，聊天有共鸣</li>' +
+      '<li>贴心保障：随队医药箱、慢病用药提醒</li>' +
+      '<li>精选线路：32 条成熟行程，长短途可选</li>' +
+      '</ul>'
+  },
+  tiers: {
+    icon:ICONS.ticket, title:'服务档次及权益', sub:'选择适合您的一档',
+    content:'<p>共设三档服务，权益逐级递增：</p>' +
+      '<ul>' +
+      '<li><b>基础档</b>：专家团标准行程 + 领队服务 + 旅游意外险</li>' +
+      '<li><b>进阶档</b>：基础档 + 优选酒店房型 + 每日水果茶点 + 景区小交通</li>' +
+      '<li><b>尊享档</b>：进阶档 + 单间差减免 + 专属管家 + 全程摄影跟拍</li>' +
+      '</ul>' +
+      '<p>提前 30 天报名升级，可享限时优惠。</p>'
+  },
+  hotline: {
+    icon:ICONS.phone, title:'旅游热线', sub:'随时为您服务',
+    content:'<p>如需咨询线路详情或定制行程，欢迎拨打：</p>' +
+      '<p class="hotline">400-800-1234</p>' +
+      '<ul>' +
+      '<li>服务时间：每日 9:00 – 21:00</li>' +
+      '<li>现场咨询台：会展中心 A 馆东侧</li>' +
+      '<li>商务合作：partner@example.com</li>' +
+      '</ul>'
+  },
+  signup: {
+    icon:ICONS.pen, title:'立即报名', sub:'填写信息，锁定席位',
+    content:'<ul>' +
+      '<li>姓名 / 联系电话（必填）</li>' +
+      '<li>意向线路：从 32 条中任选</li>' +
+      '<li>服务档次：基础 / 进阶 / 尊享</li>' +
+      '<li>出行人数与同行关系（选填）</li>' +
+      '</ul>' +
+      '<p>正式推文中此处可嵌入公众号报名表单或小程序跳转链接。</p>'
+  }
+};
+
+function openModal(id) {
+  const m = MODAL_DATA[id];
+  if (!m) return;
+  document.getElementById('modalBox').innerHTML =
+    '<button class="close" onclick="closeModal()">✕</button>' +
+    `<h2><span class="ic">${m.icon}</span>${m.title}</h2>` +
+    `<div class="sub">${m.sub}</div>` +
+    `<div class="content">${m.content}</div>` +
+    `<button class="cta" onclick="alert('示例按钮：可替换为报名表单 / 客服跳转')">${id === 'signup' ? '提交报名（示例）' : '咨询与报名'}</button>`;
+  document.getElementById('modalMask').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalMask').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ==================== 路线面板 ==================== */
+let navMode = 'area';   /* area=按区域 / days=按天数，两种并行的分类方式 */
+let navKey = '';        /* 空 = 尚未选择分类，此时不显示任何线路 */
+let view = 'home';      /* home=分类入口 / list=分类下的方案 / route=某条线路的行程图 */
+let openNav = '';       /* 当前展开的父级 key，同一时间只展开一个 */
+let curSlug = ROUTES[0].slug;
+let imgWarned = false;
+
+function openRoutePanel() {
+  document.getElementById('routePanel').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  goHome();
+}
+
+/* 头部返回：行程页 → 分类列表 → 分类入口 → 关闭面板 */
+function rpBack() {
+  if (view === 'route') return navKey ? renderList() : goHome();
+  if (view === 'list')  return goHome();
+  closeRoutePanel();
+}
+
+function goHome() {
+  navKey = '';
+  openNav = '';
+  renderHome();
+}
+
+function goCatalog() { goHome(); }
+
+/* 进入某条线路 */
+function openRoute(slug) {
+  curSlug = slug;
+  view = 'route';
+  renderSide();
+  renderPages();
+}
+
+/* ---- 分类入口页：只列分类，不列方案 ---- */
+function renderHome() {
+  view = 'home';
+  navKey = '';
+  const body = document.getElementById('rpBody');
+  document.getElementById('rpTitle').textContent = '路线介绍';
+  document.getElementById('rpCap').textContent = '共 ' + ROUTES.length + ' 条线路 · 请先选择分类';
+  document.getElementById('rpBackBtn').textContent = '✕';
+
+  const nIn = filterBy('省内').length, nOut = filterBy('省外').length;
+  let html = '<div class="home">';
+
+  html += '<div class="home-sec"><h3>按区域浏览<em>广东省内 / 省外</em></h3><div class="home-grid">';
+  html += entCard('省内', '省内线路', '短途为主 · 2–4 天', nIn);
+  html += entCard('省外', '省外线路', '邻省 · 国内 · 边疆', nOut);
+  html += entCard('all', '全部线路', '一次看全', ROUTES.length);
+  html += '</div></div>';
+
+  html += '<div class="home-sec"><h3>按天数浏览<em>两天一夜 ~ 六天五夜</em></h3><div class="home-grid">';
+  DAY_TIERS.forEach(t => {
+    const key = 'd-' + t.day, list = filterBy(key);
+    if (!list.length) return;                       /* 内容为 0 的档位不显示 */
+    const a = list.filter(r => r.group === '省内').length;
+    const b = list.length - a;
+    const sub = !b ? '省内线路' : (!a ? '省外线路' : '省内 ' + a + ' · 省外 ' + b);
+    html += entCard(key, t.label, sub, list.length);
+  });
+  html += '</div></div>';
+
+  html += '</div>';
+  body.innerHTML = html;
+  body.scrollTop = 0;
+  renderSide();
+}
+
+function entCard(key, title, sub, n) {
+  return `<button class="ent-card" data-pick="${key}">` +
+           `<div><div class="et">${title}</div><div class="es">${sub}</div></div>` +
+           `<em class="en">${n} 条 ›</em>` +
+         `</button>`;
+}
+
+/* ---- 分类下的方案列表 ---- */
+function renderList() {
+  view = 'list';
+  const body = document.getElementById('rpBody');
+  const total = filterBy(navKey).length;
+  document.getElementById('rpTitle').textContent = navLabel(navKey) || '路线介绍';
+  document.getElementById('rpCap').textContent = '共 ' + total + ' 条 · 点击卡片查看行程';
+  document.getElementById('rpBackBtn').textContent = '‹';
+
+  const groups = listGroups(navKey);
+  const showSec = groups.length > 1;
+  let html = '<div class="catalog">';
+  groups.forEach(g => {
+    if (!g.list.length) return;
+    if (showSec) html += '<div class="cat-sec"><h3>' + g.label + '</h3><em>' + g.list.length + ' 条</em></div>';
+    html += '<div class="cat-grid">';
+    g.list.forEach(r => {
+      html += `<button class="cat-card" data-goto="${r.slug}">` +
+                `<div class="cc-img">` +
+                  `<img src="routes/thumbs/${r.slug}.${IMG_EXT}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` +
+                `</div>` +
+                `<div class="cc-body"><div class="cc-t">${r.title}</div>` +
+                (r.sub ? `<div class="cc-m">${r.sub}</div>` : '') +
+                `</div>` +
+              `</button>`;
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  body.scrollTop = 0;
+  renderSide();
+}
+function closeRoutePanel() {
+  document.getElementById('routePanel').classList.remove('show');
+  toggleSide(false);
+  document.body.style.overflow = '';
+}
+
+function toggleSide(open) {
+  const side = document.getElementById('rpSide');
+  const mask = document.getElementById('rpMask');
+  side.classList.toggle('open', !!open);
+  mask.classList.toggle('show', !!open);
+}
+
+/* 按导航 key 过滤 */
+function filterBy(key) {
+  if (!key || key === 'all') return ROUTES;
+  if (key === '省内' || key === '省外') return ROUTES.filter(r => r.group === key);
+  if (key.indexOf('省内-') === 0) {
+    const d = parseInt(key.split('-')[1], 10);
+    return ROUTES.filter(r => r.group === '省内' && parseInt(r.days, 10) === d);
+  }
+  if (key.indexOf('省外-') === 0) {
+    const sub = key.slice(3);
+    return ROUTES.filter(r => r.group === '省外' && r.sub === sub);
+  }
+  if (key.indexOf('d-') === 0) {
+    const d = parseInt(key.slice(2), 10);
+    return ROUTES.filter(r => parseInt(r.days, 10) === d);
+  }
+  return ROUTES;
+}
+
+/* 列表页的分组方式：省内按天数、省外按子区域、天数分类单组 */
+function listGroups(key) {
+  const list = filterBy(key);
+  if (key === 'all') {
+    return [
+      { label:'省内线路', list: list.filter(r => r.group === '省内') },
+      { label:'省外线路', list: list.filter(r => r.group === '省外') }
+    ].filter(g => g.list.length);
+  }
+  if (key === '省内') {
+    return DAY_TIERS.map(t => ({
+      label: t.label, list: list.filter(r => parseInt(r.days, 10) === t.day)
+    })).filter(g => g.list.length);
+  }
+  if (key === '省外') {
+    return ['邻省', '湾区', '国内', '祖国边疆'].map(s => ({
+      label: s, list: list.filter(r => r.sub === s)
+    })).filter(g => g.list.length);
+  }
+  return [{ label: navLabel(key), list }];
+}
+
+function navLabel(key) {
+  for (const n of NAV_AREA) {
+    if (n.key === key) return n.label;
+    if (n.children) {
+      const c = n.children.find(x => x.key === key);
+      if (c) return n.label + ' · ' + c.label;
+    }
+  }
+  const d = NAV_DAYS.find(x => x.key === key);
+  return d ? d.label : '';
+}
+
+/* ---- 渲染侧栏 ---- */
+function renderSide() {
+  const side = document.getElementById('rpSide');
+
+  let html = '<button class="side-close" onclick="toggleSide(false)">✕</button>';
+  html += '<div class="side-seg">' +
+            `<button class="${navMode === 'area' ? 'on' : ''}" data-mode="area">按区域</button>` +
+            `<button class="${navMode === 'days' ? 'on' : ''}" data-mode="days">按天数</button>` +
+          '</div>';
+
+  if (navMode === 'area') {
+    html += '<div class="side-cap">区域分类</div>';
+    NAV_AREA.forEach(n => {
+      const n2 = filterBy(n.key).length;
+      if (!n2) return;                                  /* 内容为 0 的分类不显示 */
+      const isOn = navKey === n.key;
+      if (n.children) {
+        const kids = n.children.filter(c => filterBy(c.key).length);
+        const openCls = (openNav === n.key || navKey.indexOf(n.key + '-') === 0) ? ' open' : '';
+        html += `<div class="nav-item${isOn ? ' on' : ''}${openCls}" data-nav="${n.key}">` +
+                `<span>${n.label}</span><em>${n2}</em><i class="caret">›</i></div>`;
+        if (kids.length) {
+          html += `<div class="nav-sub${openCls}">`;
+          kids.forEach(c => {
+            const on = navKey === c.key ? ' on' : '';
+            html += `<div class="nav-item sub${on}" data-nav="${c.key}"><span>${c.label}</span><em>${filterBy(c.key).length}</em></div>`;
+          });
+          html += '</div>';
+        }
+      } else {
+        html += `<div class="nav-item${isOn ? ' on' : ''}" data-nav="${n.key}">` +
+                `<span>${n.label}</span><em>${n2}</em></div>`;
+      }
+    });
+  } else {
+    html += '<div class="side-cap">行程天数</div>';
+    NAV_DAYS.forEach(c => {
+      const n = filterBy(c.key).length;
+      if (!n) return;
+      const on = navKey === c.key ? ' on' : '';
+      html += `<div class="nav-item${on}" data-nav="${c.key}"><span>${c.label}</span><em>${n}</em></div>`;
+    });
+  }
+
+  /* 未选择分类时不列任何线路 */
+  if (!navKey) {
+    html += '<div class="side-hint">选择上方任一分类后，这里显示对应线路</div>';
+  } else {
+    const list = filterBy(navKey);
+    html += `<div class="side-cap" style="margin-top:14px">${navLabel(navKey)} · 共 <em>${list.length}</em> 条</div>`;
+    html += '<div class="route-list">';
+    if (!list.length) {
+      html += '<div class="route-empty">该分类暂无线路</div>';
+    } else {
+      list.forEach(r => {
+        const on = (view === 'route' && r.slug === curSlug) ? ' on' : '';
+        html += `<div class="route-item${on}" data-slug="${r.slug}">` +
+                `<img src="routes/thumbs/${r.slug}.${IMG_EXT}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` +
+                `<div><div class="ri-t">${r.title}</div></div>` +
+                '</div>';
+      });
+    }
+    html += '</div>';
+  }
+
+  side.innerHTML = html;
+  /* 移动端：换了分类后，侧栏自动滚回顶部，避免停在旧位置 */
+  side.scrollTop = 0;
+}
+
+/* ---- 渲染图片 ---- */
+function renderPages() {
+  const r = ROUTES.find(x => x.slug === curSlug) || ROUTES[0];
+  const body = document.getElementById('rpBody');
+  document.getElementById('rpTitle').textContent = r.title;
+  document.getElementById('rpCap').textContent = '行程单 · 点击图片可放大';
+  document.getElementById('rpBackBtn').textContent = '‹';
+
+  let html = `<div class="tip"></div>`;
+  for (let i = 1; i <= r.pages; i++) {
+    const n = String(i).padStart(2, '0');
+    html += `<img class="page-img" loading="lazy" src="routes/${r.slug}/${n}.${IMG_EXT}" ` +
+            `alt="${r.title} 第 ${i} 页" onclick="openViewer(this.src)" onerror="onImgError(this)">`;
+  }
+  body.innerHTML = html;
+  body.scrollTop = 0;
+}
+
+function onImgError(el) {
+  el.classList.add('fail');
+  el.onclick = null;
+  if (imgWarned) return;
+  imgWarned = true;
+  const tip = document.querySelector('.rp-body .tip');
+  if (tip) tip.innerHTML += '<span class="warn">部分图片未能加载，请确认 routes 文件夹与 index.html 在同一目录</span>';
+}
+
+/* ---- 侧栏事件委托 ---- */
+document.getElementById('rpSide').addEventListener('click', function (e) {
+  const modeEl = e.target.closest('[data-mode]');
+  if (modeEl) {
+    if (navMode === modeEl.dataset.mode) return;
+    navMode = modeEl.dataset.mode;
+    goHome();                                          /* 切换分类方式：回到分类入口，不保留旧选择 */
+    return;
+  }
+  const navEl = e.target.closest('[data-nav]');
+  if (navEl) {
+    const key = navEl.dataset.nav;
+    const parent = NAV_AREA.find(n => n.key === key && n.children);
+    if (key.indexOf('-') > -1) openNav = key.split('-')[0];        /* 点子项：展开其所属父级 */
+    else if (parent) openNav = (openNav === key ? '' : key);       /* 点父项：切换展开 / 收起 */
+    else openNav = '';                                            /* 点普通项：收起所有 */
+    selectNav(key);
+    return;
+  }
+  const rEl = e.target.closest('[data-slug]');
+  if (rEl) {
+    openRoute(rEl.dataset.slug);
+    if (window.innerWidth < 820) toggleSide(false);
+  }
+});
+
+/* 分类入口页 / 目录卡片点击 */
+document.getElementById('rpBody').addEventListener('click', function (e) {
+  const p = e.target.closest('[data-pick]');
+  if (p) {
+    const key = p.dataset.pick;
+    navMode = key.indexOf('d-') === 0 ? 'days' : 'area';
+    openNav = key === 'all' ? '' : (key.indexOf('-') > -1 ? key.split('-')[0] : key);
+    selectNav(key);
+    return;
+  }
+  const c = e.target.closest('[data-goto]');
+  if (c) openRoute(c.dataset.goto);
+});
+
+/* 选定某个分类：进入该分类的方案列表 */
+function selectNav(key) {
+  navKey = key;
+  if (!filterBy(key).length) { renderSide(); return; }
+  renderList();
+  if (window.innerWidth < 820) toggleSide(false);
+}
+
+function openViewer(src) {
+  document.getElementById('viewerImg').src = src;
+  document.getElementById('viewer').classList.add('show');
+}
+function closeViewer() {
+  document.getElementById('viewer').classList.remove('show');
+  document.getElementById('viewerImg').src = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('viewer').classList.contains('show')) return closeViewer();
+  if (document.getElementById('rpSide').classList.contains('open')) return toggleSide(false);
+  if (document.getElementById('routePanel').classList.contains('show')) {
+    return rpBack();
+  }
+  closeModal();
+});
+
+/* ==================== 分享 ==================== */
+function showShareTip() {
+  document.getElementById('shareTip').classList.add('show');
+}
+</script>
+</body>
+</html>
